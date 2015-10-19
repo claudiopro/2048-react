@@ -25,3 +25,5 @@ Tile.prototype.serialize = function () {
     value: this.value
   };
 };
+
+module.exports = Tile;

@@ -1,2 +1,4 @@
 .sass-cache/
 /node_modules/
+/dist/js/*
+/dist/css/*.css
