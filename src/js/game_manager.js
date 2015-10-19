@@ -1,4 +1,4 @@
-var Tile = require('./tile'),
+var Tile = require('./tile').Tile,
     Grid = require('./grid');
 
 function GameManager(size, InputManager, Actuator, StorageManager) {
