@@ -1,5 +1,5 @@
 # 2048-react
-A React clone of [2048](https://github.com/gabrielecirulli/2048) by [Gabriele Cirulli](https://github.com/gabrielecirulli), based on [Saming's 2048](http://saming.fr/p/2048/) (also a clone).
+A React clone of [2048](https://github.com/gabrielecirulli/2048) by [Gabriele Cirulli](https://github.com/gabrielecirulli).
 
 Made just for fun. [Play it here!](http://claudiopro.github.io/2048-react/)
 
