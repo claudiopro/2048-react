@@ -1,7 +1,6 @@
 var ReactDOM = require('react-dom'),
     React = require('react'),
-    GridContainer = require('./grid-container'),
-    TileContainer = require('./tile-container'),
+    Container = require('./container'),
     GameManager = require('./game_manager'),
     KeyboardInputManager = require('./keyboard_input_manager'),
     HTMLActuator = require('./html_actuator'),
@@ -9,7 +8,7 @@ var ReactDOM = require('react-dom'),
 
 // Wait till the browser is ready to render the game (avoids glitches)
 window.requestAnimationFrame(function () {
-  ReactDOM.render(<div><GridContainer size="4"/><TileContainer/></div>, document.getElementById('attach-point'));
+  ReactDOM.render(<Container size="4"/>, document.getElementById('attach-point'));
 
   new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
 });
