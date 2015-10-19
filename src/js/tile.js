@@ -10,8 +10,8 @@ var _Tile = React.createClass({
       };
     },
     render: function() {
-      var classnames_ = classnames('tile',
-      ['tile-position', this.props.x, this.props.y].join('-'), {
+      var classnames_ = classnames('tile', 'tile-' + this.props.value,
+      ['tile-position', this.props.x + 1, this.props.y + 1].join('-'), {
         'tile-new' : this.state.isNew
       })
       return (
@@ -29,6 +29,8 @@ var _Tile = React.createClass({
     }
 });
 
+var _prog = 0;
+
 function Tile(position, value) {
   this.x                = position.x;
   this.y                = position.y;
@@ -36,6 +38,7 @@ function Tile(position, value) {
 
   this.previousPosition = null;
   this.mergedFrom       = null; // Tracks tiles that merged together
+  this.prog             = _prog++;
 }
 
 Tile.prototype.savePosition = function () {

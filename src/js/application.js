@@ -10,5 +10,5 @@ var ReactDOM = require('react-dom'),
 window.requestAnimationFrame(function () {
   ReactDOM.render(<Container size="4" startTiles="2" />, document.getElementById('attach-point'));
 
-  new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
+  // new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
 });

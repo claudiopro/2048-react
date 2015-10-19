@@ -5,7 +5,7 @@ var TileContainer = React.createClass({
   getChildren: function() {
     var children = [];
     this.props.tiles.forEach(function(item) {
-      children.push(<Tile x={item.x} y={item.y} value={item.value} />);
+      children.push(<Tile x={item.x} y={item.y} value={item.value} key={item.prog}/>);
     });
     return children;
   },
