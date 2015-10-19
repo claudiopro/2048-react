@@ -1,4 +1,4 @@
-var Tile = require('./tile'),
+var Tile = require('./tile').Tile,
     Grid = require('./grid');
 
 function GameManager(size, InputManager, Actuator, StorageManager) {
@@ -9,9 +9,9 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
 
   this.startTiles     = 2;
 
-  this.inputManager.on("move", this.move.bind(this));
-  this.inputManager.on("restart", this.restart.bind(this));
-  this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
+  // this.inputManager.on("move", this.move.bind(this));
+  // this.inputManager.on("restart", this.restart.bind(this));
+  // this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
 
   this.setup();
 }

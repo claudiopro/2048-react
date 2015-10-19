@@ -8,7 +8,7 @@ var ReactDOM = require('react-dom'),
 
 // Wait till the browser is ready to render the game (avoids glitches)
 window.requestAnimationFrame(function () {
-  ReactDOM.render(<Container size="4"/>, document.getElementById('attach-point'));
+  ReactDOM.render(<Container size="4" startTiles="2" />, document.getElementById('attach-point'));
 
-  new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
+  // new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager);
 });

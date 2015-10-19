@@ -1,4 +1,4 @@
-var Tile = require('./tile');
+var Tile = require('./tile').Tile;
 
 function Grid(size, previousState) {
   this.size = size;
@@ -90,6 +90,7 @@ Grid.prototype.cellContent = function (cell) {
 // Inserts a tile at its position
 Grid.prototype.insertTile = function (tile) {
   this.cells[tile.x][tile.y] = tile;
+  console.log(this.toString());
 };
 
 Grid.prototype.removeTile = function (tile) {
@@ -99,6 +100,17 @@ Grid.prototype.removeTile = function (tile) {
 Grid.prototype.withinBounds = function (position) {
   return position.x >= 0 && position.x < this.size &&
          position.y >= 0 && position.y < this.size;
+};
+
+Grid.prototype.toString = function () {
+  var ret = [];
+  for (var y = 0; y < this.size; y++) {
+    for (var x = 0; x < this.size; x++) {
+      ret.push(this.cells[x][y] ? this.cells[x][y].value : '·');
+    }
+    ret.push('\n');
+  }
+  return ret.join('');
 };
 
 Grid.prototype.serialize = function () {

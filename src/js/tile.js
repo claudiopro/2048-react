@@ -1,10 +1,35 @@
-var React = require('react');
+var React = require('react'),
+  classnames = require('classnames');
 
 var _Tile = React.createClass({
+    getInitialState: function() {
+      return {
+        previousPosition: null,
+        mergedFrom:       null,
+        isNew:            true
+      };
+    },
     render: function() {
-      return <div>{this.props.value}</div>;
+      var classnames_ = classnames('tile', 'tile-' + this.props.value,
+      ['tile-position', this.props.x + 1, this.props.y + 1].join('-'), {
+        'tile-new' : this.state.isNew
+      })
+      return (
+        <div className={classnames_}><div className="tile-inner">{this.props.value}</div></div>
+      );
+    },
+    componentDidUpdate: function() {
+      this.setState({
+        previosuPosition: {
+          x: this.props.x,
+          y: this.props.y
+        },
+        isNew: false
+      });
     }
 });
+
+var _prog = 0;
 
 function Tile(position, value) {
   this.x                = position.x;
@@ -13,6 +38,7 @@ function Tile(position, value) {
 
   this.previousPosition = null;
   this.mergedFrom       = null; // Tracks tiles that merged together
+  this.prog             = _prog++;
 }
 
 Tile.prototype.savePosition = function () {
@@ -34,4 +60,7 @@ Tile.prototype.serialize = function () {
   };
 };
 
-module.exports = Tile;
+module.exports = {
+  Tile: Tile,
+  ReactTile: _Tile
+};
