@@ -1,3 +1,11 @@
+var React = require('react');
+
+var _Tile = React.createClass({
+    render: function() {
+      return <div>{this.props.value}</div>;
+    }
+});
+
 function Tile(position, value) {
   this.x                = position.x;
   this.y                = position.y;
