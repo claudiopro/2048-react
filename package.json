@@ -1,0 +1,29 @@
+{
+  "name": "2048",
+  "version": "1.0.0",
+  "description": "A small clone of 1024 written with React native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/claudiopro/2048.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "2048",
+    "game"
+  ],
+  "author": "Claudio Procida",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/claudiopro/2048/issues"
+  },
+  "homepage": "https://github.com/claudiopro/2048#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.0.4"
+  }
+}
