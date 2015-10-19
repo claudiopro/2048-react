@@ -104,8 +104,8 @@ Grid.prototype.withinBounds = function (position) {
 
 Grid.prototype.toString = function () {
   var ret = [];
-  for (var x = 0; x < this.size; x++) {
-    for (var y = 0; y < this.size; y++) {
+  for (var y = 0; y < this.size; y++) {
+    for (var x = 0; x < this.size; x++) {
       ret.push(this.cells[x][y] ? this.cells[x][y].value : '·');
     }
     ret.push('\n');

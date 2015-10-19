@@ -72,7 +72,6 @@ var Container = React.createClass({
     };
   },
   restart: function () {
-    //console.log('restart');
     storageManager.clearGameState();
     this.actuator.continueGame(); // Clear the game won/lost message
     this.setup();
@@ -80,7 +79,6 @@ var Container = React.createClass({
 
   // Keep playing after winning (allows going over 2048)
   keepPlaying: function () {
-    //console.log('keepPlaying');
     this.keepPlaying = true;
     this.actuator.continueGame(); // Clear the game won/lost message
   },
@@ -136,7 +134,6 @@ var Container = React.createClass({
 
   // Sends the updated grid to the actuator
   actuate: function () {
-    //console.log('actuate');
     if (storageManager.getBestScore() < this.score) {
       storageManager.setBestScore(this.score);
     }
@@ -169,10 +166,7 @@ var Container = React.createClass({
         }
       });
     });
-    //console.log(this.grid.cells);
-    //console.log('before setState');
-    //console.log(tiles);
-    this.setState({tiles: tiles});
+    this.setState({score: this.score, tiles: tiles});
   },
 
   // Represent the current game as an object
@@ -205,25 +199,19 @@ var Container = React.createClass({
 
   // Move tiles on the grid in the specified direction
   move: function (direction) {
-    //console.log('move');
     // 0: up, 1: right, 2: down, 3: left
     var self = this;
 
-    //console.log('after self');
     if (this.isGameTerminated()) return; // Don't do anything if the game's over
 
     var cell, tile;
 
     var vector     = this.getVector(direction);
-    //console.log('vector:', vector);
     var traversals = this.buildTraversals(vector);
-    //console.log('traversals:', traversals);
     var moved      = false;
 
-    //console.log('before prepareTiles');
     // Save the current tile positions and remove merger information
     this.prepareTiles();
-    //console.log('after prepareTiles');
     // Traverse the grid in the right direction and move tiles
     traversals.x.forEach(function (x) {
       traversals.y.forEach(function (y) {
@@ -261,7 +249,6 @@ var Container = React.createClass({
       });
     });
 
-    //console.log('moved:', moved);
     if (moved) {
       this.addRandomTile();
 
@@ -269,7 +256,6 @@ var Container = React.createClass({
         this.over = true; // Game over!
       }
 
-      //console.log('before actuate');
       this.actuate();
     }
   },
