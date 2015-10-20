@@ -1,12 +1,17 @@
 var React = require('react'),
+  classnames = require('classnames'),
   TileContainer = require('./tile-container'),
   GridContainer = require('./grid-container');
 
 var GameContainer = React.createClass({
   render: function() {
+    var classes_ = classnames('game-message', {
+      'game-won': this.props.won,
+      'game-over': this.props.over
+    });
     return (
       <div className="game-container">
-        <div className="game-message">
+        <div className={classes_}>
           <p></p>
           <div className="lower">
             <a className="keep-playing-button">Keep going</a>
