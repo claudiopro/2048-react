@@ -8,26 +8,10 @@ var React = require('react'),
   Tile = require('./tile').Tile;
 
 var storageManager = new StorageManager();
-var previousState = storageManager.getGameState();
 
 var Container = React.createClass({
   componentWillMount: function() {
-    // Reload the game from a previous game if present
-    if (previousState) {
-      this.grid        = new Grid(previousState.grid.size,
-                                  previousState.grid.cells); // Reload grid
-      this.score       = previousState.score;
-      this.over        = previousState.over;
-      this.won         = previousState.won;
-      this.keepPlaying = previousState.keepPlaying;
-    } else {
-      this.grid        = new Grid(this.props.size);
-      this.score       = 0;
-      this.over        = false;
-      this.won         = false;
-      this.keepPlaying = false;
-    }
-    this.setState({score: this.score, best: storageManager.getBestScore(), tiles: this.getRandomTiles()});
+    this.setup();
   },
 
   componentDidMount: function() {
@@ -48,7 +32,7 @@ var Container = React.createClass({
         </p>
         <hr/>
         <p>
-          Created by <a href="http://www.emeraldion.it" target="_blank">Claudio Procida</a>. A clone of <a href="https://gabrielecirulli.github.io/2048/" target="_blank">2048</a> by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli</a>.
+          Created by <a href="http://www.emeraldion.it" target="_blank">Claudio Procida</a>. A clone of <a href="https://gabrielecirulli.github.io/2048/" target="_blank">2048</a> by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli</a> written using <a href="https://facebook.github.io/react" target="_blank">React</a>.
         </p>
       </div>
     );
@@ -76,7 +60,9 @@ var Container = React.createClass({
   },
 
   continueGame: function() {
-
+    this.won = false;
+    this.over = false;
+    // this.setState({won: this.won, over: this.over});
   },
 
   restart: function () {
@@ -114,13 +100,8 @@ var Container = React.createClass({
       this.over        = false;
       this.won         = false;
       this.keepPlaying = false;
-
-      // Add the initial tiles
-      this.addStartTiles();
     }
-
-    // Update the actuator
-    this.actuate();
+    this.setState({score: this.score, best: storageManager.getBestScore(), tiles: this.getRandomTiles()});
   },
 
   // Set up the initial tiles to start the game with
