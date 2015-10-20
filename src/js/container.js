@@ -13,7 +13,7 @@ var previousState = storageManager.getGameState();
 var Container = React.createClass({
   componentWillMount: function() {
     // Reload the game from a previous game if present
-    if (false && previousState) {
+    if (previousState) {
       this.grid        = new Grid(previousState.grid.size,
                                   previousState.grid.cells); // Reload grid
       this.score       = previousState.score;
@@ -29,18 +29,20 @@ var Container = React.createClass({
     }
     this.setState({score: this.score, best: storageManager.getBestScore(), tiles: this.getRandomTiles()});
   },
+
   componentDidMount: function() {
     this.inputManager = new KeyboardInputManager();
     this.inputManager.on("move", this.move);
     this.inputManager.on("restart", this.restart);
     this.inputManager.on("keepPlaying", this.keepPlaying);
   },
+
   render: function() {
     return (
       <div className="container">
         <Heading score={this.state.score} best={this.state.best}/>
         <AboveGame/>
-        <GameContainer size={this.props.size} tiles={this.state.tiles} />
+        <GameContainer size={this.props.size} tiles={this.state.tiles} won={this.state.won} over={this.state.over}/>
         <p className="game-explanation">
           <strong className="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
         </p>
@@ -59,6 +61,7 @@ var Container = React.createClass({
     }
     return ret;
   },
+
   getRandomTile: function() {
     var value = Math.random() < 0.9 ? 2 : 4;
     var pos = this.grid.randomAvailableCell();
@@ -71,16 +74,21 @@ var Container = React.createClass({
       prog: tile.prog
     };
   },
+
+  continueGame: function() {
+
+  },
+
   restart: function () {
     storageManager.clearGameState();
-    this.actuator.continueGame(); // Clear the game won/lost message
+    this.continueGame(); // Clear the game won/lost message
     this.setup();
   },
 
   // Keep playing after winning (allows going over 2048)
   keepPlaying: function () {
     this.keepPlaying = true;
-    this.actuator.continueGame(); // Clear the game won/lost message
+    this.continueGame(); // Clear the game won/lost message
   },
 
   // Return true if the game is lost, or has won and the user hasn't kept playing
@@ -93,7 +101,7 @@ var Container = React.createClass({
     var previousState = storageManager.getGameState();
 
     // Reload the game from a previous game if present
-    if (false && previousState) {
+    if (previousState) {
       this.grid        = new Grid(previousState.grid.size,
                                   previousState.grid.cells); // Reload grid
       this.score       = previousState.score;
@@ -134,10 +142,6 @@ var Container = React.createClass({
 
   // Sends the updated grid to the actuator
   actuate: function () {
-    if (storageManager.getBestScore() < this.score) {
-      storageManager.setBestScore(this.score);
-    }
-
     // Clear the state when the game is over (game over only, not win)
     if (this.over) {
       storageManager.clearGameState();
@@ -166,7 +170,14 @@ var Container = React.createClass({
         }
       });
     });
-    this.setState({score: this.score, tiles: tiles});
+
+    if (storageManager.getBestScore() < this.score) {
+      storageManager.setBestScore(this.score);
+      this.setState({score: this.score, best: this.score, tiles: tiles, won: this.won, over:this.over});
+    }
+    else {
+      this.setState({score: this.score, tiles: tiles, won: this.won, over:this.over});
+    }
   },
 
   // Represent the current game as an object
