@@ -9,10 +9,11 @@ var GameContainer = React.createClass({
       'game-won': this.props.won,
       'game-over': this.props.over
     });
+    var message = this.props.won ? "You win!" : "Game over!";
     return (
       <div className="game-container">
         <div className={classes_}>
-          <p></p>
+          <p>{message}</p>
           <div className="lower">
             <a className="keep-playing-button">Keep going</a>
             <a className="retry-button">Try again</a>
