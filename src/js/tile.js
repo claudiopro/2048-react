@@ -1,32 +1,34 @@
 var React = require('react'),
-  classnames = require('classnames');
+  classnames = require('classnames'),
+  PureRenderMixin = require('react-addons-pure-render-mixin');
 
 var _Tile = React.createClass({
-    getInitialState: function() {
-      return {
-        previousPosition: null,
-        mergedFrom:       null,
-        isNew:            true
-      };
-    },
-    render: function() {
-      var classnames_ = classnames('tile', 'tile-' + this.props.value,
-      ['tile-position', this.props.x + 1, this.props.y + 1].join('-'), {
-        'tile-new' : this.state.isNew
-      })
-      return (
-        <div className={classnames_}><div className="tile-inner">{this.props.value}</div></div>
-      );
-    },
-    componentDidUpdate: function() {
-      this.setState({
-        previosuPosition: {
-          x: this.props.x,
-          y: this.props.y
-        },
-        isNew: false
-      });
-    }
+  mixins: [PureRenderMixin],
+  getInitialState: function() {
+    return {
+      previousPosition: null,
+      mergedFrom:       null,
+      isNew:            true
+    };
+  },
+  render: function() {
+    var classnames_ = classnames('tile', 'tile-' + this.props.value,
+    ['tile-position', this.props.x + 1, this.props.y + 1].join('-'), {
+      'tile-new' : this.state.isNew
+    })
+    return (
+      <div className={classnames_}><div className="tile-inner">{this.props.value}</div></div>
+    );
+  },
+  componentDidUpdate: function() {
+    this.setState({
+      previosuPosition: {
+        x: this.props.x,
+        y: this.props.y
+      },
+      isNew: false
+    });
+  }
 });
 
 var _prog = 0;
