@@ -1,7 +1,9 @@
 var React = require('react'),
-  GridRow = require('./grid-row');
+  GridRow = require('./grid-row'),
+  PureRenderMixin = require('react-addons-pure-render-mixin');
 
 var GridContainer = React.createClass({
+  mixins: [PureRenderMixin],
   getChildren: function() {
     var children = []
     for (var i = 0; i < this.props.size; i++)
