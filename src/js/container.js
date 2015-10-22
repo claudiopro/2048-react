@@ -101,7 +101,7 @@ var Container = React.createClass({
       this.won         = false;
       this.keepPlaying = false;
     }
-    this.setState({score: this.score, best: storageManager.getBestScore(), tiles: this.getRandomTiles()});
+    this.setState({score: this.score, best: storageManager.getBestScore(), tiles: this.getRandomTiles(), over: this.over, won: this.won});
   },
 
   // Set up the initial tiles to start the game with
