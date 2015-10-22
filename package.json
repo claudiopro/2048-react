@@ -1,7 +1,7 @@
 {
   "name": "2048",
   "version": "1.0.0",
-  "description": "A small clone of 1024 written with React native",
+  "description": "A small clone of 2048 written with React",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
